@@ -3,6 +3,8 @@ document.querySelectorAll('.video').forEach(function (b) {
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
     f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    // YouTube rejects embeds without a referrer (error 153); the page itself uses no-referrer.
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
     f.title = b.getAttribute('aria-label');
     b.replaceChildren(f);
   }, { once: true });

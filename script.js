@@ -7,6 +7,27 @@ document.querySelectorAll('.video').forEach(function (b) {
     b.replaceChildren(f);
   }, { once: true });
 });
+(function () {
+  var links = [].slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var current = null;
+  function update() {
+    var line = innerHeight * 0.35, active = null;
+    sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) active = links[i]; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) active = links[links.length - 1];
+    if (active === current) return;
+    if (current) current.classList.remove('active');
+    current = active;
+    if (current) {
+      current.classList.add('active');
+      var bar = current.parentElement;
+      bar.scrollTo({ left: current.offsetLeft - (bar.clientWidth - current.offsetWidth) / 2, behavior: 'smooth' });
+    }
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
 document.querySelectorAll('.copy').forEach(function (b) {
   var label = b.textContent;
   b.addEventListener('click', function () {

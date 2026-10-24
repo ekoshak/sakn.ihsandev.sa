@@ -32,7 +32,10 @@ nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,t
 nav .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
 nav .wrap::-webkit-scrollbar{display:none}
 nav a{flex:none;text-decoration:none;color:var(--ink);font-size:15px;font-weight:500;padding:6px 14px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
-nav a.roof-link{background:var(--gold);border-color:var(--gold);color:#fff}
+nav a{transition:background-color .2s,color .2s,border-color .2s}
+nav a.roof-link{border-color:var(--gold);color:var(--gold)}
+nav a.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+nav a.roof-link.active{background:var(--gold);border-color:var(--gold);color:#fff}
 
 /* sections */
 main{padding:28px 0 8px}

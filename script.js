@@ -30,6 +30,13 @@ document.querySelectorAll('.video').forEach(function (b) {
   addEventListener('resize', update);
   update();
 })();
+// Numbers are stored reversed + base64 so they don't appear as plain text in the public repo.
+document.querySelectorAll('.call[data-n]').forEach(function (a) {
+  var n = atob(a.dataset.n).split('').reverse().join('');
+  var local = '0' + n.slice(3);
+  a.href = 'tel:+' + n;
+  a.querySelector('span').textContent = local.slice(0, 3) + ' ' + local.slice(3, 6) + ' ' + local.slice(6);
+});
 document.querySelectorAll('.copy').forEach(function (b) {
   var label = b.textContent;
   b.addEventListener('click', function () {
